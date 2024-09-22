@@ -1,0 +1,54 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files (variables de entorno, suelen incluir información sensible como claves secretas)
+.env
+
+# Database files (puede que no quieras incluir dumps o backups locales)
+*.sql
+*.sqlite
+*.db
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# npm package-lock
+package-lock.json
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Coverage directory (si usas una herramienta de pruebas como Jest)
+coverage/
+
+# Build output (si tu proyecto tiene algún tipo de build como transpile con Babel)
+dist/
+
+# Sessions and other cache files
+*.pid
+*.seed
+*.pid.lock
+
+# IDE or editor-specific files (dependiendo del editor que uses)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Miscellaneous
+*.bak
+*.orig
+*.rej
+
+# Optional: Exclude migrations or database dump files (si usas migraciones SQL)
+migrations/*.sql
