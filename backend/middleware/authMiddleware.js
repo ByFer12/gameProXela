@@ -11,6 +11,6 @@ exports.isAuthenticated = (req, res, next) => {
     if (req.session.rol === role) {
       return next();
     }
-    res.status(403).json({message:'Acceso denegado, solo administradores'});
+    res.status(403).json({message:`Acceso denegado, permitir solo a ${role}`});
   };
   

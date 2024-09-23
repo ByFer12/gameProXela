@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const adminRoute = require('./routes/adminRoute');
 const bodegRoute =require('./routes/bodegRoute');
 const invRoute=require('./routes/invRoute');
+const cajeroRoute=require('./routes/cajeroRoute');
 const  {isAuthenticated, isRole } = require('./middleware/authMiddleware');
 
 dotenv.config();
@@ -24,7 +25,8 @@ app.use('/auth', authRoutes);
 
 app.use('/admin', isAuthenticated, isRole("ADMINISTRADOR"),adminRoute);
 app.use('/bodega', isAuthenticated, isRole("BODEGA"),bodegRoute);
-app.use('/inv', isAuthenticated, isRole("INVENTARIO"),invRoute);
+app.use('/invent', isAuthenticated, isRole("INVENTARIO"),invRoute);
+app.use('/cajero', isAuthenticated, isRole("CAJERO"), cajeroRoute);
 /*
 app.use('/products', productRoutes);
 */
