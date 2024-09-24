@@ -1,0 +1,11 @@
+  /* Estilo para limitar la altura de la tabla y permitir el scroll */
+  .table-wrapper {
+    max-height: 420px; /* Ajusta esta altura para el scroll */
+    overflow-y: auto;
+
+  }
+
+
+  .contenedor{
+    margin-top: 55px;
+  }

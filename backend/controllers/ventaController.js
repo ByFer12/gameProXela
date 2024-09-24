@@ -10,6 +10,7 @@ exports.regVenta = async(req,res) =>{
     console.log("Id empleado venta: "+idEmpleado+" y su sucursal es: "+idSucursal);
 
     try{
+        
         const venta= await ventaModel.registrarVenta(esConsumidorFinal,puntosGanados,numero_factura,nit,idEmpleado,idSucursal,total_sin_descuento,total_con_descuento, productos);
         res.status(201).json({message:'Venta realizada ',ven:venta});
     } catch (error) {

@@ -1,6 +1,8 @@
 const pool = require('../config/db');
 const bcript = require('bcrypt');
 const saltRounds = 10;
+
+
 exports.crearUsuario = async (req, res) => {
 
     const { nombre, apellido, username, password, rol, numero_caja, sucursal_id } = req.body;

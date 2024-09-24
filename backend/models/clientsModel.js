@@ -9,10 +9,6 @@ exports.crearCliente= async(nit, nombre, apellido, total_gastado,puntos,tipo_tar
 }
 
 
-//solicitar cambiar tarjeta
-
-
-
 //solicitar editar datos
 exports.solicitarEditarCliente = async (nit, nombre, apellido, direccion, telefono) => {
     const result = await pool.query(
@@ -24,6 +20,7 @@ exports.solicitarEditarCliente = async (nit, nombre, apellido, direccion, telefo
   
     return result.rows[0]; 
   };
+  
 
   //obtener solicitudes editar cliente
 exports.obtenerSolicitudesEdicion = async () => {

@@ -1,0 +1,5 @@
+.tab-wrapper {
+    max-height: 220px; /* Ajusta esta altura para el scroll */
+    overflow-y: auto;
+
+  }

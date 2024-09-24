@@ -1,0 +1,41 @@
+/* Estilos para la barra lateral */
+.sidebar {
+    background-color: #343a40; /* Color oscuro */
+    height: 100vh; /* Altura completa */
+    width: 380px; /* Ancho más amplio */
+    padding-top: 20px; /* Espaciado superior */
+  }
+  
+  .nav-link.btn {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    color: #fff; /* Texto blanco */
+    font-size: 16px; /* Tamaño de texto más grande */
+    background-color: #495057; /* Fondo oscuro */
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link.btn:hover {
+    background-color: #6c757d; /* Cambio de color al pasar el mouse */
+  }
+  
+  .nav-link i {
+    margin-right: 10px; /* Espacio entre icono y texto */
+    font-size: 18px; /* Tamaño del icono */
+  }
+  
+  .nav-link.btn.active {
+    background-color: #007bff; /* Fondo azul para la opción activa */
+  }
+  
+  .nav-link.btn.btn-danger {
+    background-color: #dc3545; /* Fondo rojo para logout */
+    margin-top: auto; /* Empuja el botón al fondo */
+  }
+  
+  /* Main Content */
+
+  

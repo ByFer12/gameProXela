@@ -8,6 +8,7 @@ const bodegRoute =require('./routes/bodegRoute');
 const invRoute=require('./routes/invRoute');
 const cajeroRoute=require('./routes/cajeroRoute');
 const  {isAuthenticated, isRole } = require('./middleware/authMiddleware');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -15,10 +16,19 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+  origin: 'http://localhost:5173', // El origen de tu frontend (Vite)
+  credentials: true, // Si estás usando cookies o sesiones
+}));
+
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'tu_secreto_aqui',
   resave: false,
   saveUninitialized: true,
+  cookie: {
+    secure: false, // Cambiar a true si usas HTTPS
+    httpOnly: true,
+  },
 }));
 
 app.use('/auth', authRoutes);

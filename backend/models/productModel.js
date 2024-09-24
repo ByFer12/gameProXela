@@ -21,6 +21,7 @@ exports.getAllProducts = async () => {
   };
 
 exports.obtenerProductosStock= async()=>{
+  console.log("COnsultado productos")
     const result= await pool.query('SELECT *FROM get_full_product_inventory()');
     return result.rows;
 }
