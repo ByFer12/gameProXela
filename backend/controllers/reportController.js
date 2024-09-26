@@ -68,7 +68,7 @@ exports.getTopVentas = async (req, res) => {
         }
 
         // Enviar los resultados
-        res.status(200).json({ historia: historial.rows });
+        res.status(200).json({ historia: historial });
 
     } catch (error) {
 
@@ -81,17 +81,11 @@ exports.getTopVentas = async (req, res) => {
 
 //OBTIENE LAS 2 SUCURSALES CON MAS INGRESOS 
 exports.getSucursalesMasIngresos = async (req, res) => {
-    const { fecha_inicio, fecha_fin } = req.query;
-
+  
     try {
-        // Validar que las fechas estén presentes
-        if (!fecha_inicio || !fecha_fin) {
-            return res.status(400).json({ message: 'Debe proporcionar las fechas fecha_inicio y fecha_fin' });
-        }
-        const historial = await pool.query(`SELECT * FROM obtener_top_sucursales($1,$2)`, [fecha_inicio, fecha_fin]);
-        if (historial.rows.length === 0) {
-            return res.status(404).json({ message: 'No se encontraron Top de las sucursales con mas ingresos' });
-        }
+
+        const historial = await pool.query(`SELECT * FROM obtener_top_sucursales()`);
+
 
         // Enviar los resultados
         res.status(200).json({ historia: historial.rows });

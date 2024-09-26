@@ -6,5 +6,6 @@ const productController=require('../controllers/productController');
 //rutas para Inventario
 router.post('/vender', productController.moverProdBodegaToPasillo);
 router.get('/productStock', productController.obtenerProductos);
+router.get('/games',productController.obtenerEnBodega);
 
 module.exports=router;

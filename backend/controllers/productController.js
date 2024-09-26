@@ -15,6 +15,7 @@ exports.moveProductToBodega = async (req, res) => {
         res.status(500).json({ message: "error al agregar el producto a bodega" });
     }
 }
+
 exports.moverProdBodegaToPasillo =async(req,res)=>{
     console.log("Quiero ver la sesioooooon mover de bodega a pasillo: "+req.session.sucursal_id+" El id del usuario es: "+req.session.userId);
     const id_sucursal=req.session.sucursal_id;
@@ -30,6 +31,20 @@ exports.moverProdBodegaToPasillo =async(req,res)=>{
     }
 
 
+}
+exports.obtenerEnBodega=async(req,res)=>{
+
+  const id_sucursal=req.session.sucursal_id;
+  const id_empleado=req.session.userId;
+  try {
+    const productos= await productModel.obtenerDetallesIngresoBodega(id_sucursal);
+    res.status(200).json({productos});
+} catch (error) {
+    console.log("No cargan productos: "+error.message);
+
+    res.status(500).json({ message:"No se pudieron cargar los productos"});
+    
+}
 }
 
 //obtener productos existentes en stock
@@ -58,8 +73,9 @@ exports.getAllProducts = async (req, res) => {
   };
 
   //obtengo productos con deetalles
-  exports.getAllProducts = async (req, res) => {
+  exports.getAllProductssss = async (req, res) => {
     try {
+      console.log("Obteniendo productos: ");
       const products = await productModel.getAllProductsDetails();
       res.status(200).json(products);
     } catch (error) {

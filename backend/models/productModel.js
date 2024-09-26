@@ -14,11 +14,16 @@ exports.addProdBodegaToPassillo=async(id_sucursal, id_producto, cantidad, pasill
         [id_sucursal,id_producto,cantidad,pasillo,id_empleado]);
         return result.rows[0];
 }
-// Obtener todos los productos sin detalles
-exports.getAllProducts = async () => {
-    const result = await pool.query('SELECT nombre,precio FROM products');
-    return result.rows;
-  };
+
+
+  // Función para obtener los detalles de ingreso a bodega
+  exports.obtenerDetallesIngresoBodega = async (id_sucursal) => {
+  
+    const cuery = await pool.query( 'SELECT * FROM obtener_detalles_ingreso_bodega($1)',[id_sucursal]);
+    
+    return cuery.rows;
+
+};
 
 exports.obtenerProductosStock= async()=>{
   console.log("COnsultado productos")
@@ -28,7 +33,7 @@ exports.obtenerProductosStock= async()=>{
 
 // Obtener todos los productos con detalles
 exports.getAllProductsDetails = async () => {
-    const result = await pool.query('SELECT * FROM products');
+    const result = await pool.query('SELECT * FROM productos.producto');
     return result.rows;
   };
 

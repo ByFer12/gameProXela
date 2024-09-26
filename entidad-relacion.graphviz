@@ -1,0 +1,149 @@
+graph ER {
+    node [shape=box]; /* Entities */
+    sucursales; ventas; productos; empleado; caja; ingreso_bodega; ingreso_pasillo; 
+    inventario_stock; inventario_bodega; historico_descuentos; solicitud_tarjeta;
+    venta; solicitud_edit_cliente; bodegas; factura_venta;
+    
+    node [shape=ellipse]; /* Attributes */
+    
+    /* Sucursales attributes */
+    sucursal_id [label="id_sucursal"];
+    nombre_sucursal [label="nombre"];
+    direccion_sucursal [label="direccion"];
+    telefono_sucursal [label="telefono"];
+    
+    /* Ventas attributes */
+    venta_id [label="id"];
+    fecha_venta [label="fecha"];
+    total_venta [label="total"];
+    descuento_venta [label="descuento"];
+    
+    /* Productos attributes */
+    producto_id [label="id"];
+    nombre_producto [label="nombre"];
+    descripcion [label="descripcion"];
+    precio [label="precio"];
+    
+    /* Empleado attributes */
+    empleado_id [label="id"];
+    nombre_empleado [label="nombre"];
+    apellido_empleado [label="apellido"];
+    username [label="username"];
+    password [label="password"];
+    rol [label="rol"];
+    
+    /* Caja attributes */
+    caja_id [label="id"];
+    sucursal_caja [label="sucursal_id"];
+    numero_caja [label="numero"];
+    
+    /* Ingreso_bodega attributes */
+    ingreso_bodega_id [label="id"];
+    fecha_ingreso_bodega [label="fecha"];
+    cantidad_ingreso_bodega [label="cantidad"];
+    
+    /* Ingreso_pasillo attributes */
+    ingreso_pasillo_id [label="id"];
+    fecha_ingreso_pasillo [label="fecha"];
+    cantidad_ingreso_pasillo [label="cantidad"];
+    
+    /* Inventario_stock attributes */
+    inventario_stock_id [label="id"];
+    cantidad_stock [label="cantidad"];
+    
+    /* Inventario_bodega attributes */
+    inventario_bodega_id [label="id"];
+    cantidad_bodega [label="cantidad"];
+    
+    /* Historico_descuentos attributes */
+    historico_descuentos_id [label="id"];
+    fecha_descuento [label="fecha"];
+    descuento [label="descuento"];
+    
+    /* Solicitud_tarjeta attributes */
+    solicitud_tarjeta_id [label="id"];
+    fecha_solicitud [label="fecha"];
+    aprobado [label="aprobado"];
+    
+    /* Venta attributes */
+    venta_detalle_id [label="id"];
+    cantidad_venta [label="cantidad"];
+    precio_unitario [label="precio_unitario"];
+    
+    /* Solicitud_edit_cliente attributes */
+    solicitud_edit_id [label="id"];
+    fecha_solicitud_edit [label="fecha"];
+    aprobado_edit [label="aprobado"];
+    
+    /* Bodegas attributes */
+    bodega_id [label="id"];
+    nombre_bodega [label="nombre"];
+    
+    /* Factura_venta attributes */
+    factura_id [label="id"];
+    numero_factura [label="numero_factura"];
+    fecha_factura [label="fecha"];
+    total_factura [label="total"];
+    
+    node [shape=diamond,style=filled,color=lightgrey]; /* Relationships */
+    tiene_sucursales [label="tiene"];
+    realiza_ventas [label="realiza"];
+    vende_productos [label="vende"];
+    trabaja_en [label="trabaja en"];
+    registra_ingreso [label="registra"];
+    gestiona_inventario [label="gestiona"];
+    solicita_tarjeta [label="solicita"];
+    tiene_cajas [label="tiene"];
+    almacena [label="almacena"];
+    genera [label="genera"];
+    
+    /* Connections */
+    sucursales -- tiene_sucursales [label="1"];
+    tiene_sucursales -- ventas [label="N"];
+    
+    sucursales -- realiza_ventas [label="1"];
+    realiza_ventas -- empleado [label="N"];
+    
+    ventas -- vende_productos [label="N"];
+    vende_productos -- productos [label="M"];
+    
+    empleado -- trabaja_en [label="N"];
+    trabaja_en -- sucursales [label="1"];
+    
+    empleado -- registra_ingreso [label="1"];
+    registra_ingreso -- ingreso_bodega [label="N"];
+    registra_ingreso -- ingreso_pasillo [label="N"];
+    
+    sucursales -- gestiona_inventario [label="1"];
+    gestiona_inventario -- inventario_stock [label="N"];
+    gestiona_inventario -- inventario_bodega [label="N"];
+    
+    ventas -- solicita_tarjeta [label="1"];
+    solicita_tarjeta -- solicitud_tarjeta [label="1"];
+    
+    sucursales -- tiene_cajas [label="1"];
+    tiene_cajas -- caja [label="N"];
+    
+    bodegas -- almacena [label="1"];
+    almacena -- productos [label="N"];
+    
+    ventas -- genera [label="1"];
+    genera -- factura_venta [label="1"];
+    
+    /* Connect attributes to entities */
+    sucursales -- {sucursal_id nombre_sucursal direccion_sucursal telefono_sucursal};
+    ventas -- {venta_id fecha_venta total_venta descuento_venta};
+    productos -- {producto_id nombre_producto descripcion precio};
+    empleado -- {empleado_id nombre_empleado apellido_empleado username password rol};
+    caja -- {caja_id sucursal_caja numero_caja};
+    ingreso_bodega -- {ingreso_bodega_id fecha_ingreso_bodega cantidad_ingreso_bodega};
+    ingreso_pasillo -- {ingreso_pasillo_id fecha_ingreso_pasillo cantidad_ingreso_pasillo};
+    inventario_stock -- {inventario_stock_id cantidad_stock};
+    inventario_bodega -- {inventario_bodega_id cantidad_bodega};
+    historico_descuentos -- {historico_descuentos_id fecha_descuento descuento};
+    solicitud_tarjeta -- {solicitud_tarjeta_id fecha_solicitud aprobado};
+    venta -- {venta_detalle_id cantidad_venta precio_unitario};
+    solicitud_edit_cliente -- {solicitud_edit_id fecha_solicitud_edit aprobado_edit};
+    bodegas -- {bodega_id nombre_bodega};
+    factura_venta -- {factura_id numero_factura fecha_factura total_factura};
+}
