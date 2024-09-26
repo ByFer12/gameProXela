@@ -1,16 +1,27 @@
 const pool=require('../config/db');
 
 //insertar nuevo cliente
-exports.crearCliente= async(nit, nombre, apellido, total_gastado,puntos,tipo_tarjeta,direccion,telefono )=>{
-    const result= await pool.query('INSERT INTO ventas.cliente (nit, nombre, apellido, total_gastado,puntos,tipo_tarjeta,direccion,telefono) VALUES($1,$2,$3,$4,$5,$6,$7,$8) RETURNING*',
-    [nit, nombre, apellido, total_gastado,puntos,tipo_tarjeta,direccion,telefono]);
+exports.crearCliente= async(nit, nombre, apellido, direccion,telefono )=>{
+  console.log("Cliente 2 Nit:  "+nit+" Nombre: "+nombre+" Apelldio: "+apellido+" direccion: "+direccion+" telefono: "+telefono)
+
+
+    const result= await pool.query('INSERT INTO ventas.cliente (nit, nombre, apellido, direccion,telefono) VALUES($1,$2,$3,$4,$5) RETURNING*',
+    [nit, nombre, apellido, direccion,telefono]);
     await pool.query('COMMIT');
     return result.rows[0];
 }
 
+exports.getAllClients= async( )=>{
+
+    const result= await pool.query('SELECT * FROM ventas.cliente')
+    return result.rows;
+}
+
+
 
 //solicitar editar datos
 exports.solicitarEditarCliente = async (nit, nombre, apellido, direccion, telefono) => {
+  console.log("Cliente 2 Nit:  "+nit+" Nombre: "+nombre+" Apelldio: "+apellido+" direccion: "+direccion+" telefono: "+telefono)
     const result = await pool.query(
       `INSERT INTO ventas.solicitud_edit_cliente (nit, nombre, apellido, direccion, telefono) 
        VALUES ($1, $2, $3, $4, $5) 
@@ -21,6 +32,11 @@ exports.solicitarEditarCliente = async (nit, nombre, apellido, direccion, telefo
     return result.rows[0]; 
   };
   
+  exports.getSoliTarjeta=async()=>{
+  
+    const result=await pool.query(`SELECT*FROM public.obtener_solicitudes_con_cliente()`)
+    return result.rows;
+  }
 
   //obtener solicitudes editar cliente
 exports.obtenerSolicitudesEdicion = async () => {
@@ -40,21 +56,20 @@ exports.aprobarSolicitudEdicion = async (id) => {
        RETURNING *`,  
       [id]
     );
-   // Finalizar la transacción
-   await pool.query('COMMIT');
     return result.rows[0];
   };
 
 exports.editarClienteAdmin = async (nit, nombre, apellido, direccion, telefono) => {
+
     const result = await pool.query(
       `UPDATE ventas.cliente 
        SET nombre = $2, apellido = $3, direccion = $4, telefono = $5
-       WHERE id = $1
+       WHERE nit = $1
        RETURNING *`,
       [nit, nombre, apellido, direccion, telefono]
     );
    // Finalizar la transacción
-   await pool.query('COMMIT');
+  
     return result.rows[0]; // Retorna el cliente actualizado
   };
 
@@ -62,11 +77,11 @@ exports.editarClienteAdmin = async (nit, nombre, apellido, direccion, telefono) 
 exports.obtenerClientePorNit = async (nit) => {
     
       const result = await pool.query(
-        'SELECT nombre,apellido FROM ventas.cliente WHERE nit = $1', // Consulta SQL
+        'SELECT * FROM ventas.cliente WHERE nit = $1', // Consulta SQL
         [nit] // Parámetro NIT
       );
       if (result.rows.length === 0) {
-        return result;
+        return result.rows[0];
       }
       return result.rows[0];
   };

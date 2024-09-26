@@ -35,7 +35,6 @@ exports.moverProdBodegaToPasillo =async(req,res)=>{
 //obtener productos existentes en stock
 exports.obtenerProductos=async(req,res)=>{
   
-  console.log("Digamos que consulto")
     try {
         const productos= await productModel.obtenerProductosStock();
         res.status(200).json({productos});

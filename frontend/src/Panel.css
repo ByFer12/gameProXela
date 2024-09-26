@@ -2,7 +2,7 @@
 .sidebar {
     background-color: #343a40; /* Color oscuro */
     height: 100vh; /* Altura completa */
-    width: 380px; /* Ancho más amplio */
+    width: 310px; /* Ancho más amplio */
     padding-top: 20px; /* Espaciado superior */
   }
   
@@ -36,6 +36,6 @@
     margin-top: auto; /* Empuja el botón al fondo */
   }
   
-  /* Main Content */
+
 
   

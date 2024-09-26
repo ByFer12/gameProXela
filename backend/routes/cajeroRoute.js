@@ -13,6 +13,9 @@ router.get('/client/:nit', clienController.getClientNit);
 //obtenemos los productos para seleccionar
 router.get('/productStock', productController.obtenerProductos);
 
+//get all clients
+router.get('/clients',clienController.getClients)
+
 
 
 module.exports=router;

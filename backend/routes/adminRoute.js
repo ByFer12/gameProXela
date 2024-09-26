@@ -8,6 +8,7 @@ const reportController=require('../controllers/reportController')
 router.post('/register', userController.crearUsuario);
 router.get('/soliEdith', clientController.getSolicitudes);
 router.post('/eClient', clientController.edithClientadmin);
+router.get('/soliTar',clientController.getSoliTarjetas);
 
 //REPORTES
 router.get('/descs',reportController.historialDescuentos);
