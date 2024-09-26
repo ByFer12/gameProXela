@@ -38,6 +38,31 @@ exports.solicitarEditarCliente = async (nit, nombre, apellido, direccion, telefo
     return result.rows;
   }
 
+  exports.editarTipoTarjetaCliente = async (nit, tipo_tarjeta,id) => {
+    try {
+      const result = await pool.query(
+        `UPDATE ventas.cliente 
+         SET tipo_tarjeta = $2
+         WHERE nit = $1
+         RETURNING *`,
+        [nit, tipo_tarjeta]
+      );
+
+      await pool.query(
+        `UPDATE ventas.solicitud_tarjeta
+         SET aprobado = true
+         WHERE id = $1`,
+        [id]
+      );
+      
+      // Retornar el cliente actualizado
+      return result.rows[0]; 
+    } catch (error) {
+      console.error('Error al actualizar el tipo de tarjeta:', error);
+      throw error; // Manejar el error de manera apropiada
+    }
+  };
+  
   //obtener solicitudes editar cliente
 exports.obtenerSolicitudesEdicion = async () => {
     const result = await pool.query(

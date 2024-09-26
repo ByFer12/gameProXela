@@ -8,8 +8,7 @@ const RegistrarVenta = ({ envUsuario }) => {
   const [esConsumidorFinal, setEsConsumidorFinal] = useState(false);
   const [productos, setProductos] = useState([]);
   const [productoSel, setProductoSel] = useState(null);
-  const [productosSeleccionadosMostrar, setProductosSeleccionadosMostrar] =
-    useState([]);
+  const [productosSeleccionadosMostrar, setProductosSeleccionadosMostrar] =useState([]);
   const [productosSeleccionados, setProductosSeleccionados] = useState([]);
   const[nueva,setNueva]=useState(false);
 
@@ -27,7 +26,7 @@ const RegistrarVenta = ({ envUsuario }) => {
 
   if(nueva){
     setNueva(!nueva);
-    setproductosSeleccionados([]);
+    //setproductosSeleccionados([]);
     setEsConsumidorFinal(!esConsumidorFinal)
     setNit(null)
     setNumFactura("0")
@@ -42,9 +41,9 @@ const RegistrarVenta = ({ envUsuario }) => {
       try {
         const response = await axios.get(
           "http://localhost:3000/cajero/productStock",
-          {
-            withCredentials: true, // Asegúrate de incluir las credenciales (cookies) de la sesión
-          }
+            {
+              withCredentials: true, // Asegúrate de incluir las credenciales (cookies) de la sesión
+            }
         );
         console.log("Lo que trajo: ", response.data.productos);
         setProductos(response.data.productos);
@@ -80,9 +79,9 @@ const RegistrarVenta = ({ envUsuario }) => {
       try {
         const response = await axios.get(
           `http://localhost:3000/cajero/client/${nit}`,
-          {
-            withCredentials: true, // Asegúrate de incluir las credenciales (cookies) de la sesión
-          }
+            {
+              withCredentials: true, // Asegúrate de incluir las credenciales (cookies) de la sesión
+            }
         );
         console.log("Trajo cliente: ", response.data.client);
         setCliente(response.data.client);
@@ -297,8 +296,11 @@ const handleAdd = (e) => {
           />
         </div>
         <div className="col-2 display-6 mt-5">
-          <button className="btn btn-primary axios" onClick={handleAdd}>
+          <button className="btn btn-primary " onClick={handleAdd}>
             Agregar
+          </button>
+          <button className="btn btn-primary axios" onClick={handleAdd}>
+            Nueva venta
           </button>
         </div>
       </form>

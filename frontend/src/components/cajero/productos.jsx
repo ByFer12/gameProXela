@@ -12,8 +12,6 @@ const TotalPagar = ({
   id_empleado,
   sucursal,
   productosss,
-  estado,
-  ne
 }) => {
   const [mensaje, setMensaje] = useState("");
   const [vendido, setVendido] = useState(false);
@@ -22,7 +20,7 @@ const TotalPagar = ({
   const handleEnvioVenta = async (e) => {
     e.preventDefault();
 
-    estado(!ne)
+  
     const datos = {
       esConsumidorFinal: cf,
       puntosGanados: puntos,
@@ -51,6 +49,7 @@ const TotalPagar = ({
       setVendido(false);
       console.error(error);
     }
+ 
   };
 
   return (

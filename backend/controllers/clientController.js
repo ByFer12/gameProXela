@@ -37,6 +37,20 @@ exports.getSoliTarjetas=async(req,res)=>{
         res.status(500).json({message:"No se pudieron obtener solicitud cambio de tarjetas"});
     }
 }
+//Aqui editamos la tarjeta del cliente por el ADMIN
+exports.editarTipoTarjeta=async(req,res)=>{
+
+    const {nit,tipo_tarjeta,id}=req.body;
+    try{
+        const editTar=await clientModel.editarTipoTarjetaCliente(nit,tipo_tarjeta,id);
+        res.status(201).json({message:"Tarjetas encontradas ",tar:editTar})
+
+    }catch(error){
+        console.log(error)
+        res.status(500).json({message:"No se pudo editar tarjeta de cliente"});
+
+    }
+}
 
 //solicitar editar cliente por el cajero 
 exports.edithClient=async(req, res)=>{
